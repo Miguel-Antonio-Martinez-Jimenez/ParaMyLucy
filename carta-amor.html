@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Carta para mi Luz María</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 30%, #F0F8FF 70%, #E6E6FA 100%);
+      min-height: 100vh;
+      margin: 0;
+      font-family: 'Georgia', serif;
+      padding: 20px;
+      animation: backgroundShift 15s ease-in-out infinite;
+    }
+
+    @keyframes backgroundShift {
+      0%, 100% { background: linear-gradient(135deg, #FFE4E1 0%, #FFF0F5 30%, #F0F8FF 70%, #E6E6FA 100%); }
+      50% { background: linear-gradient(135deg, #FFF0F5 0%, #F0F8FF 30%, #E6E6FA 70%, #FFE4E1 100%); }
+    }
+
+    /* Partículas flotantes de corazones */
+    .hearts {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 1;
+    }
+
+    .heart {
+      position: absolute;
+      color: #FF69B4;
+      font-size: 20px;
+      animation: floatHeart 8s linear infinite;
+      opacity: 0;
+    }
+
+    @keyframes floatHeart {
+      0% { 
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% { opacity: 0.8; }
+      90% { opacity: 0.8; }
+      100% { 
+        transform: translateY(-10vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+
+    .letter-container {
+      max-width: 800px;
+      margin: 40px auto;
+      background: linear-gradient(145deg, #fff, #f9f9f9);
+      border-radius: 15px;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      padding: 50px;
+      position: relative;
+      z-index: 10;
+      animation: letterAppear 2s ease-out;
+      border: 3px solid transparent;
+      background-clip: padding-box;
+    }
+
+    .letter-container::before {
+      content: '';
+      position: absolute;
+      top: -3px;
+      left: -3px;
+      right: -3px;
+      bottom: -3px;
+      background: linear-gradient(45deg, #FF69B4, #FFD700, #FF69B4, #FFA500);
+      border-radius: 18px;
+      z-index: -1;
+      animation: borderGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes borderGlow {
+      0%, 100% { opacity: 0.7; }
+      50% { opacity: 1; }
+    }
+
+    @keyframes letterAppear {
+      0% { 
+        opacity: 0; 
+        transform: scale(0.8) translateY(50px) rotate(2deg);
+      }
+      100% { 
+        opacity: 1; 
+        transform: scale(1) translateY(0) rotate(0deg);
+      }
+    }
+
+    .letter-header {
+      text-align: center;
+      margin-bottom: 40px;
+      border-bottom: 2px solid #FFD700;
+      padding-bottom: 20px;
+    }
+
+    .letter-title {
+      font-size: 2.5rem;
+      color: #8B4513;
+      font-weight: bold;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+      margin-bottom: 10px;
+      animation: titleGlow 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes titleGlow {
+      0% { text-shadow: 2px 2px 4px rgba(0,0,0,0.1), 0 0 20px rgba(255, 105, 180, 0.3); }
+      100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.1), 0 0 30px rgba(255, 105, 180, 0.6); }
+    }
+
+    .letter-subtitle {
+      font-size: 1.3rem;
+      color: #B8860B;
+      font-style: italic;
+      margin: 0;
+    }
+
+    .letter-content {
+      line-height: 2;
+      font-size: 1.2rem;
+      color: #2F4F4F;
+      text-align: justify;
+      text-indent: 30px;
+      margin-bottom: 30px;
+    }
+
+    .letter-content p {
+      margin-bottom: 25px;
+      animation: textReveal 0.8s ease-out forwards;
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    .letter-content p:nth-child(1) { animation-delay: 0.5s; }
+    .letter-content p:nth-child(2) { animation-delay: 1s; }
+    .letter-content p:nth-child(3) { animation-delay: 1.5s; }
+    .letter-content p:nth-child(4) { animation-delay: 2s; }
+    .letter-content p:nth-child(5) { animation-delay: 2.5s; }
+    .letter-content p:nth-child(6) { animation-delay: 3s; }
+    .letter-content p:nth-child(7) { animation-delay: 3.5s; }
+
+    @keyframes textReveal {
+      0% { 
+        opacity: 0; 
+        transform: translateY(20px);
+      }
+      100% { 
+        opacity: 1; 
+        transform: translateY(0);
+      }
+    }
+
+    .letter-signature {
+      text-align: right;
+      margin-top: 40px;
+      padding-top: 20px;
+      border-top: 1px solid #DDD;
+    }
+
+    .signature-text {
+      font-size: 1.4rem;
+      color: #8B4513;
+      font-weight: bold;
+      margin-bottom: 10px;
+      animation: signatureGlow 2s ease-in-out infinite alternate;
+    }
+
+    @keyframes signatureGlow {
+      0% { color: #8B4513; }
+      100% { color: #FF1493; }
+    }
+
+    .signature-love {
+      font-size: 2rem;
+      color: #FF69B4;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+      animation: heartbeat 1.5s ease-in-out infinite;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+    }
+
+    /* Decoraciones florales */
+    .floral-decoration {
+      position: absolute;
+      font-size: 30px;
+      color: #FFD700;
+      animation: decorationFloat 4s ease-in-out infinite;
+    }
+
+    .floral-decoration.top-left {
+      top: 20px;
+      left: 20px;
+      animation-delay: 0s;
+    }
+
+    .floral-decoration.top-right {
+      top: 20px;
+      right: 20px;
+      animation-delay: 1s;
+    }
+
+    .floral-decoration.bottom-left {
+      bottom: 20px;
+      left: 20px;
+      animation-delay: 2s;
+    }
+
+    .floral-decoration.bottom-right {
+      bottom: 20px;
+      right: 20px;
+      animation-delay: 3s;
+    }
+
+    @keyframes decorationFloat {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-10px) rotate(10deg); }
+    }
+
+    /* Botón de regreso */
+    .back-button {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      background: linear-gradient(135deg, #FF69B4, #FFD700);
+      border: none;
+      border-radius: 25px;
+      padding: 12px 20px;
+      font-size: 1rem;
+      font-weight: bold;
+      color: #fff;
+      cursor: pointer;
+      box-shadow: 0 6px 15px rgba(255, 105, 180, 0.4);
+      transition: all 0.3s ease;
+      z-index: 20;
+    }
+
+    .back-button:hover {
+      transform: translateY(-2px) scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 105, 180, 0.6);
+    }
+
+    /* Media queries para móviles */
+    @media (max-width: 768px) {
+      .letter-container {
+        margin: 20px auto;
+        padding: 30px 25px;
+      }
+
+      .letter-title {
+        font-size: 2rem;
+      }
+
+      .letter-content {
+        font-size: 1.1rem;
+        line-height: 1.8;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Corazones flotantes -->
+  <div class="hearts">
+    <div class="heart" style="left: 10%; animation-delay: 0s;">💕</div>
+    <div class="heart" style="left: 20%; animation-delay: 1s;">💖</div>
+    <div class="heart" style="left: 30%; animation-delay: 2s;">💗</div>
+    <div class="heart" style="left: 40%; animation-delay: 3s;">💝</div>
+    <div class="heart" style="left: 50%; animation-delay: 4s;">💕</div>
+    <div class="heart" style="left: 60%; animation-delay: 5s;">💖</div>
+    <div class="heart" style="left: 70%; animation-delay: 1.5s;">💗</div>
+    <div class="heart" style="left: 80%; animation-delay: 2.5s;">💝</div>
+    <div class="heart" style="left: 90%; animation-delay: 3.5s;">💕</div>
+  </div>
+
+  <!-- Botón de regreso -->
+  <button class="back-button" onclick="window.close()">← Regresar</button>
+
+  <div class="letter-container">
+    <!-- Decoraciones florales -->
+    <div class="floral-decoration top-left">🌸</div>
+    <div class="floral-decoration top-right">🌺</div>
+    <div class="floral-decoration bottom-left">🌻</div>
+    <div class="floral-decoration bottom-right">🌹</div>
+
+    <div class="letter-header">
+      <h1 class="letter-title">💌 Carta de Amor 💌</h1>
+      <p class="letter-subtitle">Para mi Luz María, mi Cachetona Hermosa</p>
+    </div>
+
+    <div class="letter-content">
+      <p>Mi amada Luz María, mi Cachetona Hermosa, hoy en este día tan especial de las flores amarillas quiero abrir mi corazón de par en par para ti, porque no hay suficientes palabras en este mundo que logren describir lo que siento. Tú eres mi eternidad, mi destino y la razón por la cual sonrío incluso en los momentos más difíciles. Desde que llegaste a mi vida todo cambió, porque contigo descubrí lo que realmente significa amar y ser amado de verdad.</p>
+
+      <p>Las flores amarillas simbolizan esperanza, alegría, amor y un futuro compartido, pero para mí, tú eres mucho más que eso. Tú eres mi paz en medio de las tormentas, la ilusión que me impulsa a ser mejor cada día, y la certeza de que no importa qué pase, siempre habrá un lugar seguro para mí en tu abrazo. Cuando pienso en ti, mi Cachetona Hermosa, mi corazón late con una fuerza diferente, como si quisiera gritar al mundo entero que te pertenece, que todo lo que soy y todo lo que tengo es tuyo.</p>
+
+      <p>Quiero que este día especial no solo sea un detalle bonito, sino un recordatorio eterno de lo mucho que te amo y lo agradecido que estoy con la vida por cruzar nuestros caminos. Tú eres mi presente y mi futuro, el sueño que jamás quiero despertar, la historia más bonita que la vida escribió para mí. No hay distancia, ni tiempo, ni problema que pueda vencer lo que sentimos, porque lo nuestro está hecho de verdad, de pasión, de respeto y de un cariño que no conoce límites.</p>
+
+      <p>Mi vida feliz eres tú, Luz María. Cada día contigo es un regalo que atesoro con el alma, porque en ti encontré lo que siempre soñé: alguien que me entiende, que me acompaña, que me llena de ternura y de amor sincero. A tu lado no necesito nada más, porque en ti tengo todo. Eres mi sol en los días grises, mi refugio cuando me siento perdido, y mi mayor alegría en cada instante.</p>
+
+      <p>Quiero prometerte algo hoy y siempre: voy a cuidarte, respetarte, apoyarte y amarte de todas las maneras posibles. Quiero estar en tus victorias, en tus batallas, en tus sonrisas y en tus lágrimas, porque nada me importa más que estar contigo en cada momento de esta vida. Mi sueño es que siempre recuerdes lo valiosa, hermosa y única que eres para mí, porque no existe nadie que pueda ocupar tu lugar en mi corazón.</p>
+
+      <p>Mi Cachetona Hermosa, este día de las flores amarillas se queda corto para todo lo que siento por ti. Podría llenar un millón de páginas y aún así no lograría expresar la magnitud de este amor que me consume y me llena de felicidad. Solo quiero que sepas que eres mi todo, mi principio y mi fin, mi razón de seguir luchando y la persona con la que quiero caminar hasta el último de mis días.</p>
+
+      <p>Gracias por existir, por darme tu amor, por regalarme tu compañía y por ser mi vida entera. Hoy, mañana y siempre, serás la dueña de mi corazón, mi más grande orgullo y mi más hermoso regalo.</p>
+    </div>
+
+    <div class="letter-signature">
+      <div class="signature-text">Con todo mi amor eterno,</div>
+      <div class="signature-love">Te amo x3 millones amor ❤️</div>
+    </div>
+  </div>
+</body>
+</html>
